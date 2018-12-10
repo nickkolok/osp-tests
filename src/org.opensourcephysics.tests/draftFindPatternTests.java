@@ -22,8 +22,6 @@ class TemplateMatcherTests {
     @DisplayName("Simple pattern recognition")
     void SimplePatternRecognition() {
 
-        System.out.println("1948");
-
         TemplateMatcher templateMatcher = null;
         BufferedImage
                 bufImg = null,
@@ -51,9 +49,7 @@ class TemplateMatcherTests {
 
 
         long startTime = System.currentTimeMillis();
-        //templateMatcher = new TemplateMatcher(bufImg,null);
         long endTime = System.currentTimeMillis();
-        //System.out.println(endTime - startTime);
 
 
         try
@@ -61,16 +57,9 @@ class TemplateMatcherTests {
             bufImg = ImageIO.read(new File("osp-tests/media/glass_pattern1.png"));
         } catch (IOException e){e.printStackTrace();}
 
-        //BufferedImage input = new BufferedImage(bufImg.getWidth(), bufImg.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        //input.createGraphics().drawImage(bufImg, 0, 0, null);
-
-        //assertEquals(input.getType(),BufferedImage.TYPE_INT_ARGB,"image.getType()==BufferedImage.TYPE_INT_ARGB");
-
         mask = new Ellipse2D.Double(0,0,bufImg.getWidth(), bufImg.getHeight());
-        //startTime = System.currentTimeMillis();
         templateMatcher = new TemplateMatcher(bufImg,mask);
-        //endTime = System.currentTimeMillis();
-        //System.out.println(endTime - startTime);
+
         TPoint matchPoint = templateMatcher.getMatchLocation(wholeImg1, new Rectangle(0, 0, wholeImg1.getWidth(), wholeImg1.getHeight()));
         assertEquals(matchPoint, new TPoint(1173.0, 643.0), "The point should be exact!");
 
@@ -103,19 +92,5 @@ class TemplateMatcherTests {
 
 
     }
-/*
-    @ParameterizedTest(name = "{0} + {1} = {2}")
-    @CsvSource({
-            "0,    1,   1",
-            "1,    2,   3",
-            "49,  51, 100",
-            "1,  100, 101"
-    })
-    void add(int first, int second, int expectedResult) {
-        Calculator calculator = new Calculator();
-        assertEquals(expectedResult, calculator.add(first, second),
-                () -> first + " + " + second + " should equal " + expectedResult);
-    }
-*/
 
 }

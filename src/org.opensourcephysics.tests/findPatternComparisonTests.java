@@ -18,11 +18,12 @@ import java.awt.Rectangle;
 
 class TemplateMatcherComparisonTests {
 
+    //Uncomment to run
     @Test
     @DisplayName("Simple pattern recognition")
     void SimplePatternRecognition() {
 
-
+/*
         BufferedImage
             bufImg = null,
             tmpImg = null,
@@ -35,7 +36,6 @@ class TemplateMatcherComparisonTests {
             wholeImg1 = ImageIO.read(new File("osp-tests/media/glass_full1.png"));
             tmpImg = new BufferedImage(wholeImg1.getWidth(), wholeImg1.getHeight(), BufferedImage.TYPE_INT_RGB);
             tmpImg.getGraphics().drawImage(wholeImg1, 0, 0, null);
-            //tmpImg.dispose();
             wholeImg1 = tmpImg;
 
             wholeImg2 = ImageIO.read(new File("osp-tests/media/glass_full2.png"));
@@ -59,7 +59,7 @@ class TemplateMatcherComparisonTests {
 
 
         mask = new Ellipse2D.Double(0,0,bufImg.getWidth(), bufImg.getHeight());
-
+*/
 /*
         long totalTimeOld1=0, totalTimeOld2=0, totalTimeNew=0;
         long time1, time2, time3, time4;
@@ -107,7 +107,7 @@ class TemplateMatcherComparisonTests {
         System.out.println(totalTimeNew);
 */
 
-
+/*
         long totalTimeOld1=0, totalTimeOld2=0, totalTimeOld3=0, totalTimeNew=0;
         long time1, time2, time3, time4;
 
@@ -138,12 +138,6 @@ class TemplateMatcherComparisonTests {
             }
             time3 = System.currentTimeMillis();
 
-            /*
-            for(int j = 0; j < 1; j++) {
-                templateMatcherOld2 = new TemplateMatcherOld2(bufImg, mask);
-            }
-            time4 = System.currentTimeMillis();
-            */
 
             totalTimeOld3 += time3 - time2;
             totalTimeNew += time2 - time1;
@@ -151,7 +145,6 @@ class TemplateMatcherComparisonTests {
         }
 
 
-        //TPoint matchPoint = templateMatcher.getMatchLocation(wholeImg1, new Rectangle(0, 0, wholeImg1.getWidth(), wholeImg1.getHeight()));
 
 
         System.out.println("Time consumed by old matcher 3, ms:");
@@ -161,26 +154,15 @@ class TemplateMatcherComparisonTests {
         System.out.println("Time consumed by new matcher, ms:");
         System.out.println(totalTimeNew);
 
-		assertEquals(2, 2, "The point should be here!");
-
-
-
-
-
-    }
-/*
-    @ParameterizedTest(name = "{0} + {1} = {2}")
-    @CsvSource({
-            "0,    1,   1",
-            "1,    2,   3",
-            "49,  51, 100",
-            "1,  100, 101"
-    })
-    void add(int first, int second, int expectedResult) {
-        Calculator calculator = new Calculator();
-        assertEquals(expectedResult, calculator.add(first, second),
-                () -> first + " + " + second + " should equal " + expectedResult);
-    }
 */
+
+		assertEquals(2, 2, "Mock assert");
+
+
+
+
+
+    }
+
 
 }
