@@ -23,7 +23,7 @@ class TemplateMatcherComparisonTests {
     @DisplayName("Simple pattern recognition")
     void SimplePatternRecognition() {
 
-/*
+
         BufferedImage
             bufImg = null,
             tmpImg = null,
@@ -59,7 +59,7 @@ class TemplateMatcherComparisonTests {
 
 
         mask = new Ellipse2D.Double(0,0,bufImg.getWidth(), bufImg.getHeight());
-*/
+
 /*
         long totalTimeOld1=0, totalTimeOld2=0, totalTimeNew=0;
         long time1, time2, time3, time4;
@@ -107,19 +107,20 @@ class TemplateMatcherComparisonTests {
         System.out.println(totalTimeNew);
 */
 
-/*
-        long totalTimeOld1=0, totalTimeOld2=0, totalTimeOld3=0, totalTimeNew=0;
+
+        long totalTimeOld1=0, totalTimeOld2=0, totalTimeOld3=0, totalTimeOld4=0, totalTimeNew=0;
         long time1, time2, time3, time4;
 
 
         TemplateMatcherOld1 templateMatcherOld1 = new TemplateMatcherOld1(bufImg, mask);
         TemplateMatcherOld2 templateMatcherOld2 = new TemplateMatcherOld2(bufImg, mask);
         TemplateMatcherOld3 templateMatcherOld3 = new TemplateMatcherOld3(bufImg, mask);
-        TemplateMatcher templateMatcherNew = new TemplateMatcher(bufImg, mask);
+        TemplateMatcherOld4 templateMatcherOld4 = new TemplateMatcherOld4(bufImg, mask);
+        TemplateMatcher     templateMatcherNew  = new TemplateMatcher    (bufImg, mask);
 
         TPoint matchPoint = null;
 
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 1; i++) {
             time1 = System.currentTimeMillis();
             for (int j = 0; j < 1; j++) {
                 matchPoint = templateMatcherNew.getMatchLocation(wholeImg1, new Rectangle(0, 0, wholeImg1.getWidth(), wholeImg1.getHeight()));
@@ -137,8 +138,17 @@ class TemplateMatcherComparisonTests {
                 matchPoint = templateMatcherOld3.getMatchLocation(wholeImg3, new Rectangle(0, 0, wholeImg3.getWidth(), wholeImg3.getHeight()));
             }
             time3 = System.currentTimeMillis();
+            for(int j = 0; j < 1; j++) {
+                matchPoint = templateMatcherOld4.getMatchLocation(wholeImg1, new Rectangle(0, 0, wholeImg1.getWidth(), wholeImg1.getHeight()));
+                matchPoint = templateMatcherOld4.getMatchLocation(wholeImg2, new Rectangle(0, 0, wholeImg2.getWidth(), wholeImg2.getHeight()));
+                matchPoint = templateMatcherOld4.getMatchLocation(wholeImg2, new Rectangle(0, 0, wholeImg2.getWidth()-10, wholeImg2.getHeight()-10));
+                matchPoint = templateMatcherOld4.getMatchLocation(wholeImg2, new Rectangle(1200, 700, 240, 240));
+                matchPoint = templateMatcherOld4.getMatchLocation(wholeImg3, new Rectangle(0, 0, wholeImg3.getWidth(), wholeImg3.getHeight()));
+            }
+            time4 = System.currentTimeMillis();
 
 
+            totalTimeOld4 += time4 - time3;
             totalTimeOld3 += time3 - time2;
             totalTimeNew += time2 - time1;
             //totalTimeOld2 += time4 - time3;
@@ -151,10 +161,12 @@ class TemplateMatcherComparisonTests {
         System.out.println(totalTimeOld3);
         //System.out.println("Time consumed by old matcher 2, ms:");
         //System.out.println(totalTimeOld2);
+        System.out.println("Time consumed by old matcher 4, ms:");
+        System.out.println(totalTimeOld4);
         System.out.println("Time consumed by new matcher, ms:");
         System.out.println(totalTimeNew);
 
-*/
+
 
 		assertEquals(2, 2, "Mock assert");
 

@@ -14,39 +14,56 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import java.awt.geom.*;
 import java.awt.Rectangle;
+import java.util.Arrays;
 
-/*
-class TemplateMatcherTests {
+class FindShiftedPatternTests {
 
     @Test
-    @DisplayName("Simple pattern recognition")
-    void SimplePatternRecognition() {
+    @DisplayName("ShiftedPatternRecognition")
+    void ShiftedPatternRecognition() {
 
         TemplateMatcher templateMatcher = null;
-        BufferedImage
-                bufImg = null,
-                tmpImg = null,
-                wholeImg1 = null,
-                wholeImg2 = null,
-                wholeImg3 = null,
-                wholeImg3dark = null;
-        Ellipse2D.Double mask = null;
-        try
-        {
-            wholeImg1 = ImageIO.read(new File("osp-tests/media/glass_full1.png"));
-            tmpImg = new BufferedImage(wholeImg1.getWidth(), wholeImg1.getHeight(), BufferedImage.TYPE_INT_RGB);
-            tmpImg.getGraphics().drawImage(wholeImg1, 0, 0, null);
-            wholeImg1 = tmpImg;
 
-            wholeImg2 = ImageIO.read(new File("osp-tests/media/glass_full2.png"));
-            tmpImg = new BufferedImage(wholeImg2.getWidth(), wholeImg2.getHeight(), BufferedImage.TYPE_INT_RGB);
-            tmpImg.getGraphics().drawImage(wholeImg2, 0, 0, null);
-            wholeImg2 = tmpImg;
+        BufferedImage wholeImg = null, templateImg1 = null, templateImg2 = null;
 
-            wholeImg3 = ImageIO.read(new File("osp-tests/media/glass_full3.png"));
-            wholeImg3dark = ImageIO.read(new File("osp-tests/media/glass_full3_dark.png"));
-        } catch (IOException e){e.printStackTrace();}
 
+
+		try
+		{
+			wholeImg = ImageIO.read(new File("osp-tests/media/VID_20181210_013457_img_8.png"));
+			wholeImg = BufferedImageUtils.convertIfNeeded(wholeImg, BufferedImage.TYPE_INT_RGB);
+
+			templateImg1 = BufferedImageUtils.convertIfNeeded(
+					ImageIO.read(new File("osp-tests/media/VID_20181210_013457_tmp1_8.png")),
+					BufferedImage.TYPE_INT_ARGB);
+			templateImg2 = BufferedImageUtils.convertIfNeeded(
+					ImageIO.read(new File("osp-tests/media/VID_20181210_013457_tmp2_8.png")),
+							BufferedImage.TYPE_INT_ARGB);
+		} catch (IOException e){e.printStackTrace();}
+
+        Rectangle mask = new Rectangle(-100,-100,200,200);
+		templateMatcher = new TemplateMatcher(templateImg1, mask);
+
+		TPoint p = templateMatcher.getMatchLocation(wholeImg,new Rectangle(528, 434, 81, 81));
+		System.out.println(p);
+		System.out.println(Arrays.toString(templateMatcher.getMatchWidthAndHeight()));
+
+		templateImg2 = BufferedImageUtils.copyImage(templateImg1);
+
+		BufferedImageUtils.shiftColors(templateImg2,new int[]{-7,-7,-7});
+
+		templateMatcher.setTemplate(templateImg2);
+		p = templateMatcher.getMatchLocation(wholeImg,new Rectangle(528, 434, 81, 81));
+		System.out.println(p);
+		System.out.println(Arrays.toString(templateMatcher.getMatchWidthAndHeight()));
+
+		BufferedImageUtils.shiftColors(templateImg2,new int[]{-7,-7,-7});
+
+		templateMatcher.setTemplate(templateImg2);
+		p = templateMatcher.getMatchLocation(wholeImg,new Rectangle(528, 434, 81, 81));
+		System.out.println(p);
+		System.out.println(Arrays.toString(templateMatcher.getMatchWidthAndHeight()));
+/*
 
         long startTime = System.currentTimeMillis();
         long endTime = System.currentTimeMillis();
@@ -107,9 +124,9 @@ class TemplateMatcherTests {
         System.out.println(matchPoint);
         assertEquals(Math.abs(matchPoint.x - 1206.809439349297) < 0.001, true);
         assertEquals(Math.abs(matchPoint.y - 813.1654226398783) < 0.001, true);
-
+*/
 
     }
 
 }
-*/
+
